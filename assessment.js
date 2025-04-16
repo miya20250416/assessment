@@ -2,7 +2,7 @@
 'use ssrict';
 const userNameInput    = document.getElementById('user-name');
 const assessmentButton = document.getElementById('assessment');
-const resultDivision   = document.getElementById('result-area');
+const resultDivided   = document.getElementById('result-area');
 const tweetDivision    = document.getElementById('tweet-area');
 
 assessmentButton.addEventListener(
@@ -13,20 +13,33 @@ assessmentButton.addEventListener(
     return; //名前が空の時は処理を終了する
   }
   //ここから下は名前が空ではない
-  resultDivision.innerText = '';
+  resultDivided.innerText = '';
   
 
 
 // TODO 診断結果表示エリアの作成
-  const header = document.createElement('h3'); //h3タグを作る
-  header.innerText = '診断結果';
-  resultDivision.appendChild(header);
+  
+    // headerDivision の作成
+    const headerDivision = document.createElement('div');
+    headerDivision.setAttribute('class', 'card-header text-bg-primary');
+    headerDivision.innerText = '診断結果';
 
-  const paragraph = document.createElement('p');
-  const result = assessment(userName);
-  paragraph.innerText = result;
-  resultDivision.appendChild(paragraph);
+    // bodyDivision の作成
+    const bodyDivision = document.createElement('div');
+    bodyDivision.setAttribute('class', 'card-body');
 
+    const paragraph = document.createElement('p');
+    paragraph.setAttribute('class', 'card-text');
+    const result = assessment(userName);
+    paragraph.innerText = result;
+    bodyDivision.appendChild(paragraph);
+
+    // resultDivision に Bootstrap のスタイルを適用する
+    resultDivided.setAttribute('class', 'card');
+
+    // headerDivision と bodyDivision を resultDivision に差し込む
+    resultDivided.appendChild(headerDivision);
+    resultDivided.appendChild(bodyDivision);
 // TODO ツイートエリアの作成
 
   tweetDivision.innerText = '';
